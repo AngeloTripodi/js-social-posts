@@ -55,3 +55,87 @@ const posts = [
         "created": "2021-03-05"
     }
 ];
+
+
+let today = new Date().toISOString().slice(0, 10)
+const endDate    = today;
+
+
+const postListElement = document.querySelector('div.posts-list');
+
+for (let i=0; i<posts.length; i++){
+    const postElement = posts[i];
+    const startDate  = postElement.created;
+
+    const diffInMs   = new Date(endDate) - new Date(startDate)
+    const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
+
+    const post = document.createElement('div');
+    post.classList.add('post');
+    post.innerHTML=`
+            <div class="post__header">
+                <div class="post-meta">                    
+                    <div class="post-meta__icon">
+                        <img class="profile-pic" src=${postElement.author.image} alt="Phil Mangione">                    
+                    </div>
+                    <div class="post-meta__data">
+                        <div class="post-meta__author">${postElement.author.name}</div>
+                        <div class="post-meta__time">${diffInDays} giorni fa</div>
+                    </div>                    
+                </div>
+            </div>
+            <div class="post__text">${postElement.content}</div>
+            <div class="post__image">
+                <img src=${postElement.media} alt="">
+            </div>
+            <div class="post__footer">
+                <div class="likes js-likes">
+                    <div class="likes__cta">
+                        <a class="like-button  js-like-button" href="#" data-postid="${postElement.id}">
+                            <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
+                            <span class="like-button__label">Mi Piace</span>
+                        </a>
+                    </div>
+                    <div class="likes__counter">
+                        Piace a <b id="like-counter-1" class="js-likes-counter">${postElement.likes}</b> persone
+                    </div>
+                </div> 
+            </div>            
+
+    `;
+    postListElement.append(post);
+
+    // const postHeader = document.createElement('div');
+    // postHeader.classList.add('post__header')
+    // postHeader.innerHTML=`
+    //             <div class="post-meta">                    
+    //                 <div class="post-meta__icon">
+    //                     <img class="profile-pic" src=${postElement.author.image} alt="Phil Mangione">                    
+    //                 </div>
+    //                 <div class="post-meta__data">
+    //                     <div class="post-meta__author">${postElement.author.name}</div>
+    //                     <div class="post-meta__time">${diffInDays} giorni fa</div>
+    //                 </div>                    
+    //             </div>
+    // `;
+    // post.append(postHeader);
+
+    // const postText = document.createElement('div');
+    // postText.classList.add('post__text')
+    // postText.innerHTML=`
+    // ${postElement.content}
+    // `;
+    // post.append(postText);
+
+    // const postImage = document.createElement('div');
+    // postImage.classList.add('post__image')
+    // postImage.innerHTML=`
+    // <img src=${postElement.media} alt="">
+    // `;
+    // post.append(postImage);
+ 
+}
+
+
+
+
