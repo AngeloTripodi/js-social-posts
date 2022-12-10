@@ -56,6 +56,11 @@ const posts = [
     }
 ];
 
+const likedPost = [];
+const idPost = [];
+
+
+
 
 let today = new Date().toISOString().slice(0, 10)
 const endDate    = today;
@@ -104,6 +109,7 @@ for (let i=0; i<posts.length; i++){
 
     `;
     postListElement.append(post);
+    idPost.push(postElement.id);
 
     // const postHeader = document.createElement('div');
     // postHeader.classList.add('post__header')
@@ -133,18 +139,44 @@ for (let i=0; i<posts.length; i++){
     // <img src=${postElement.media} alt="">
     // `;
     // post.append(postImage);
- 
+    
 }
 
-const likeButton = document.querySelector('a.like-button');
-console.log(likeButton)
 
-counter = 0;
-likeButton.addEventListener('click', function(){
-   counter++;
-   console.log(counter);
-    
-});
+
+// counter = 0;
 
 
 
+const likeButton = document.querySelectorAll('[data-postid]');
+const likeCounter = document.querySelectorAll('b.js-likes-counter');
+
+
+for (let i=0; i<likeButton.length; i++){
+    likeButton[i].addEventListener('click', function(){
+        // counter++;    
+        like = ++posts[i]["likes"];
+        // console.log(likeCounter)
+
+        likeCounter[i].innerHTML = `${like}`;
+        likeButton[i].classList.add('like-button--liked');
+        // console.log(like)
+        if (likedPost[i] == posts[i].id){
+            console.log("Il post è già stato aggiunto nell'array!!")
+        } else {
+            likedPost.push(posts[i].id)
+            console.log(likedPost)
+        }
+        // likedPost.push(posts[i].id)
+        // console.log(likedPost)
+    });
+}
+
+
+        
+// });
+
+// console.log(idPost[counter])
+// console.log(posts[counter]["likes"] + 1)
+// console.log(likeButton);
+// console.log(likeCounter);
